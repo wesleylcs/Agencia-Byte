@@ -1,0 +1,120 @@
+/* Critical CSS - Estilos essenciais para o carregamento inicial */
+:root {
+  --primary-color: #ffc857;
+  --text-color: #ffffff;
+  --bg-color: #0a0a0a;
+  --transition-speed: 0.2s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+}
+
+/* Header */
+header {
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--bg-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo img {
+  height: auto;
+  width: 90px;
+  display: block;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+/* Botões CTA */
+.cta-btn {
+  display: inline-block;
+  padding: 12px 40px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+  margin: 0.5rem;
+}
+
+.cta-btn-primary {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border: 2px solid var(--primary-color);
+}
+
+.cta-btn-secondary {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 2px solid var(--text-color);
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .cta-btn {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+} 

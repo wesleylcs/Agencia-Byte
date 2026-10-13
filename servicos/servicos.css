@@ -1,0 +1,305 @@
+/* Estilos para as páginas de serviço */
+
+/* Banner principal */
+.banner-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  margin-bottom: 60px;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.65));
+}
+
+.banner-content {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  text-align: center;
+  color: var(--text-color);
+  z-index: 2;
+  padding: 0 20px;
+}
+
+.banner-content h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.banner-content p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--text-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajuste das dimensões da seção about-content */
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 0 0 40px;
+}
+
+.about-text {
+  flex: 0 0 100%;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+/* Adaptações para o novo layout */
+.tech-section {
+  width: 100%;
+  padding: 40px 0;
+  background-color: rgba(30, 30, 30, 0.3);
+  border-radius: 12px;
+  margin-top: 30px;
+}
+
+.tech-section .section-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tech-section .section-header h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+/* Mantém os conteúdos alinhados */
+.about-text {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo para o botão de WhatsApp */
+.cta-btn-whatsapp {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.cta-btn-whatsapp:hover,
+.cta-btn-whatsapp:focus {
+  background-color: #128C7E;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(37, 211, 102, 0.2);
+}
+
+.cta-btn-whatsapp i {
+  font-size: 1.2rem;
+}
+
+/* Estilo para grids de tecnologias */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: var(--bg-lighter);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  text-align: center;
+  cursor: default;
+}
+
+.tech-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tech-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+}
+
+.tech-icon img, .tech-icon i {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.tech-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+/* Responsividade */
+@media (max-width: 991px) {
+  .banner-container {
+    height: 300px;
+  }
+  
+  .banner-content h2 {
+    font-size: 2.2rem;
+  }
+  
+  .banner-content p {
+    font-size: 1rem;
+  }
+  
+  .about-text {
+    padding: 0;
+  }
+  
+  .tech-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-container {
+    height: 250px;
+  }
+  
+  .banner-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .tech-section .section-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .tech-item {
+    padding: 10px;
+  }
+  
+  .tech-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Estilo para a seção de FAQ */
+.faq-section {
+  padding: 80px 0;
+  position: relative;
+  background-color: var(--bg-light);
+}
+
+.faq-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(10,10,10,0.92), rgba(30,30,30,0.94));
+  z-index: -1;
+}
+
+.faq-container {
+  margin-top: 50px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  background-color: var(--bg-lighter);
+  transition: all 0.3s ease;
+  border: 1px solid var(--medium-gray);
+}
+
+.faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 200, 87, 0.05);
+}
+
+.faq-question h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.faq-question i {
+  transition: transform 0.3s ease;
+  color: var(--primary-color);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 25px;
+}
+
+.faq-answer p {
+  color: var(--gray-text);
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.faq-item.active .faq-question {
+  background-color: rgba(255, 200, 87, 0.1);
+}
+
+.faq-item.active .faq-question h3 {
+  color: var(--primary-color);
+}
+
+.faq-item.active .faq-question i {
+  transform: rotate(180deg);
+}
+
+.faq-item.active .faq-answer {
+  max-height: 1000px;
+  padding: 20px 25px;
+} 

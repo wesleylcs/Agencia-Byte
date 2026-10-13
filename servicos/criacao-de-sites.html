@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WXXCMBMJ');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/all.min.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/servicos.css">
+  <link rel="icon" type="image/png" href="../imgs/Byte.png">
+  
+  <!-- Estilos para validação de formulário e modal -->
+  <style>
+    .form-group {
+      position: relative;
+    }
+    
+    .error-message {
+      display: none;
+      color: #e74c3c;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      font-weight: 500;
+    }
+    
+    .form-control.error {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+    }
+    
+    .form-control.error:focus {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+    }
+    
+    /* Modal de Sucesso */
+    .success-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(10, 10, 10, 0.9);
+      z-index: 999999;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .success-modal.active {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    /* Prevenir scroll do body quando modal está aberto */
+    body.modal-open {
+      overflow: hidden;
+      height: 100vh;
+    }
+    
+    html.modal-open {
+      overflow: hidden;
+    }
+    
+    .success-modal-content {
+      background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+      border: 2px solid #ffc857;
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 200, 87, 0.2);
+      animation: slideUp 0.4s ease;
+      position: relative;
+      z-index: 1000001;
+      margin: auto;
+    }
+    
+    .success-modal-icon {
+      width: 80px;
+      height: 80px;
+      background: #ffc857;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      animation: scaleIn 0.5s ease;
+      box-shadow: 0 5px 20px rgba(255, 200, 87, 0.4);
+    }
+    
+    .success-modal-icon i {
+      font-size: 40px;
+      color: #0a0a0a;
+    }
+    
+    .success-modal-content h3 {
+      font-size: 28px;
+      color: #ffc857;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(255, 200, 87, 0.3);
+    }
+    
+    .success-modal-content p {
+      font-size: 16px;
+      color: #ffffff;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    
+    .success-modal-close {
+      background: #ffc857;
+      color: #0a0a0a;
+      border: 2px solid #ffc857;
+      padding: 12px 40px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 200, 87, 0.3);
+    }
+    
+    .success-modal-close:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 200, 87, 0.5);
+      background: #ffd977;
+      border-color: #ffd977;
+    }
+    
+    .success-modal-close:active {
+      transform: translateY(0);
+    }
+    
+    .btn-loader {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  </style>
+
+  <!-- SEO Básico -->
+  <title>Criação de Sites Profissionais | by.te Agência Digital</title>
+  <meta name="description" content="Sites modernos, otimizados e focados em conversão. Desenvolvemos sites institucionais e landing pages sob medida para impulsionar seu negócio.">
+  
+  <!-- Open Graph (Facebook, Instagram, LinkedIn) -->
+  <meta property="og:title" content="Criação de Sites Profissionais - By.te Agência Digital" />
+  <meta property="og:description" content="Sites modernos, otimizados e focados em conversão. Desenvolvemos sites institucionais e landing pages sob medida." />
+  <meta property="og:image" content="https://www.byte-ag.com.br/imgs/thumb.jpg" />
+  <meta property="og:url" content="https://www.byte-ag.com.br/servicos/criacao-de-sites.html" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Criação de Sites Profissionais - By.te Agência Digital" />
+  <meta name="twitter:description" content="Sites modernos, otimizados e focados em conversão. Desenvolvemos sites institucionais e landing pages sob medida." />
+  <meta name="twitter:image" content="https://www.byte-ag.com.br/imgs/thumb.jpg" />
+  <meta name="twitter:url" content="https://www.byte-ag.com.br/servicos/criacao-de-sites.html" />
+
+  <meta name="keywords" content="criação de sites, desenvolvimento web, sites institucionais, landing pages, sites responsivos">
+  <meta name="author" content="by.te">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.byte-ag.com.br/servicos/criacao-de-sites.html">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WXXCMBMJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+ 
+  <!-- Header -->
+  <header id="header" class="performance-optimized">
+    <div class="container header-container">
+      <a href="../" class="logo" aria-label="By.te - Página inicial">
+        <img src="../imgs/Byte.png" alt="by.te logo" width="120" height="40" fetchpriority="high">
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu de navegação">
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <nav aria-label="Menu principal">
+        <ul id="menu">
+          <li><a href="../#about">Quem Somos</a></li>
+          <li><a href="../#services">Serviços</a></li>
+          <li><a href="../#clients">Clientes</a></li>
+          <li><a href="#contact">Contato</a></li>
+          <li><a href="#contact" class="header-cta">Fale conosco</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Banner Hero Responsivo -->
+    <section class="hero-banner">
+      <div class="hero-banner-content">
+        <h1>Criação de <span>Sites Profissionais</span></h1>
+        <p>Sites institucionais, landing pages e e-commerce com design moderno, performance e conversão.</p>
+        
+        <div class="services-list">
+          <div class="service-tag">Sites Institucionais</div>
+          <div class="service-tag">E-commerce</div>
+          <div class="service-tag">Landing Pages</div>
+          <div class="service-tag">Aplicações Web</div>
+          <div class="service-tag">Otimização SEO</div>
+        </div>
+        
+        <div class="cta-buttons" style="margin-top: 30px;">
+          <a href="#contact" class="cta-btn cta-btn-primary">Solicitar orçamento</a>
+          <a href="https://wa.me/5500000000000?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20criação%20de%20sites" class="cta-btn cta-btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conteúdo Principal -->
+    <section class="about-section">
+      <div class="about-background"></div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Por que investir em um <span>site profissional</span>?</h2>
+          <p>Um site bem desenvolvido é essencial para o sucesso do seu negócio no mundo digital</p>
+        </div>
+        
+        <div class="service-features-grid">
+          <div class="service-feature-card">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>100% Responsivo</h3>
+            <p>Seu site funciona perfeitamente em qualquer dispositivo, desde smartphones até desktops.</p>
+          </div>
+          
+          <div class="service-feature-card">
+            <i class="fas fa-tachometer-alt"></i>
+            <h3>Performance Otimizada</h3>
+            <p>Carregamento rápido e experiência fluida para seus visitantes, melhorando a taxa de conversão.</p>
+          </div>
+          
+          <div class="service-feature-card">
+            <i class="fas fa-search"></i>
+            <h3>SEO Integrado</h3>
+            <p>Desenvolvimento com foco em posicionamento no Google para atrair mais visitantes qualificados.</p>
+          </div>
+          
+          <div class="service-feature-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Foco em Conversão</h3>
+            <p>Elementos estratégicos para transformar visitantes em clientes e aumentar suas vendas.</p>
+          </div>
+        </div>
+        
+        <div class="section-header" style="margin-top: 80px;">
+          <h2>Nosso <span>Processo</span></h2>
+          <p>Como transformamos sua ideia em um site de sucesso</p>
+        </div>
+        
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="process-step-number">1</div>
+            <h3>Briefing</h3>
+            <p>Entendemos seus objetivos e definimos a estratégia ideal para seu projeto.</p>
+          </div>
+          
+          <div class="process-step">
+            <div class="process-step-number">2</div>
+            <h3>Design</h3>
+            <p>Criamos layouts modernos e alinhados com sua identidade visual.</p>
+          </div>
+          
+          <div class="process-step">
+            <div class="process-step-number">3</div>
+            <h3>Desenvolvimento</h3>
+            <p>Programação com código limpo e otimizado para performance.</p>
+          </div>
+          
+          <div class="process-step">
+            <div class="process-step-number">4</div>
+            <h3>Lançamento</h3>
+            <p>Publicação e acompanhamento contínuo para garantir resultados.</p>
+          </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="#contact" class="cta-btn cta-btn-primary">Solicitar orçamento</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tecnologias Section -->
+    <section class="tech-section">
+      <div class="tecnologias-background"></div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Tecnologias <span>Utilizadas</span></h2>
+          <p>Ferramentas e tecnologias especializadas para desenvolvimento web de alta qualidade</p>
+        </div>
+        
+        <div class="tech-grid">
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+            </div>
+            <span class="tech-name">HTML5</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+            </div>
+            <span class="tech-name">CSS3</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+            </div>
+            <span class="tech-name">JavaScript</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress">
+            </div>
+            <span class="tech-name">WordPress</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+            </div>
+            <span class="tech-name">React</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+            </div>
+            <span class="tech-name">Node.js</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-plain.svg" alt="PHP">
+            </div>
+            <span class="tech-name">PHP</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+            </div>
+            <span class="tech-name">MySQL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="faq-background"></div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Perguntas <span>Frequentes</span></h2>
+          <p>Tire suas dúvidas sobre nossos serviços de desenvolvimento web</p>
+        </div>
+        
+        <div class="faq-container">
+          <!-- Pergunta 1 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Por que minha empresa precisa de um site profissional?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Um site profissional é fundamental para estabelecer credibilidade e presença digital. Estudos mostram que 75% dos consumidores julgam a credibilidade de uma empresa com base no design do seu site. Além disso, um site bem construído funciona como seu vendedor 24/7, gerando leads e vendas mesmo quando você não está trabalhando. Com nosso desenvolvimento web profissional, você obtém uma plataforma otimizada para conversão, velocidade e experiência do usuário, aspectos cruciais para se destacar da concorrência e conquistar clientes.</p>
+            </div>
+          </div>
+          
+          <!-- Pergunta 2 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Quanto tempo leva para desenvolver um site completo?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>O tempo de desenvolvimento varia conforme a complexidade do projeto. Sites institucionais simples geralmente levam de 3 a 4 semanas, enquanto e-commerces ou plataformas mais complexas podem levar de 8 a 12 semanas. Trabalhamos com um cronograma transparente dividido em etapas: planejamento, design, desenvolvimento, implementação de conteúdo, testes e lançamento. Cada fase é validada por você antes de avançarmos, garantindo que o resultado final atenda perfeitamente às suas expectativas e necessidades de negócio.</p>
+            </div>
+          </div>
+          
+          <!-- Pergunta 3 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>O que é um site responsivo e por que é importante?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Um site responsivo é aquele que se adapta automaticamente a diferentes tamanhos de tela, oferecendo a melhor experiência visual em smartphones, tablets e desktops. Isso é crucial hoje porque mais de 60% do tráfego web vem de dispositivos móveis, e o Google prioriza sites mobile-friendly em seus resultados de busca. Todos os nossos sites são desenvolvidos com abordagem mobile-first, garantindo não apenas que funcionem em dispositivos móveis, mas que ofereçam uma experiência excepcional independentemente do dispositivo usado pelo visitante.</p>
+            </div>
+          </div>
+          
+          <!-- Pergunta 4 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Como um site pode ajudar a aumentar as vendas da minha empresa?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Um site estrategicamente desenvolvido funciona como uma poderosa ferramenta de vendas. Implementamos elementos comprovados de conversão como chamadas para ação (CTAs) estratégicas, formulários otimizados, depoimentos de clientes e páginas de vendas persuasivas. Além disso, integramos seu site com ferramentas de análise que permitem entender o comportamento dos visitantes e otimizar constantemente a experiência. Nossos clientes frequentemente relatam aumentos de 30% a 200% nas conversões após o lançamento de seus novos sites, pois aplicamos princípios de psicologia de vendas e design focado em resultados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Fale <span>Conosco</span></h2>
+          <p>Estamos prontos para desenvolver o site perfeito para o seu negócio. Entre em contato!</p>
+        </div>
+        
+        <div class="contact-container">
+          <div class="contact-form">
+            <div class="form-container">
+              <form id="contactForm" action="https://formsubmit.co/contato@byte-ag.com.br" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="box">
+                <input type="hidden" name="_subject" value="Nova mensagem do site by.te - Criação de Sites">
+                
+                <div class="form-row">
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="name" class="form-label">Nome</label>
+                      <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome" required>
+                      <span class="error-message" id="nameError"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" id="email" name="email" class="form-control" placeholder="Seu email" required>
+                      <span class="error-message" id="emailError"></span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="phone" class="form-label">Telefone</label>
+                      <input type="tel" id="phone" name="phone" class="form-control" placeholder="(11) 99999-9999">
+                      <span class="error-message" id="phoneError"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="company" class="form-label">Empresa</label>
+                      <input type="text" id="company" name="company" class="form-control" placeholder="Sua empresa">
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="service" class="form-label">Serviço de Interesse</label>
+                  <select id="service" name="service" class="form-control" required>
+                    <option value="" disabled>Selecione um serviço</option>
+                    <option value="Desenvolvimento Web" selected>Desenvolvimento Web</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Gestão de Anúncios">Gestão de Anúncios</option>
+                    <option value="Google Meu Negócio">Google Meu Negócio</option>
+                    <option value="Gestão de Avaliações">Gestão de Avaliações</option>
+                    <option value="Dashboards">Dashboards</option>
+                    <option value="SEO">SEO</option>
+                    <option value="Outro">Outro</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="message" class="form-label">Mensagem</label>
+                  <textarea id="message" name="message" class="form-control" placeholder="Como podemos ajudar?" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                  <span class="btn-text">Enviar Mensagem</span>
+                  <span class="btn-loader" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> Enviando...
+                  </span>
+                </button>
+              </form>
+            </div>
+          </div>
+          
+          <!-- Modal de Sucesso -->
+          <div id="successModal" class="success-modal">
+            <div class="success-modal-content">
+              <div class="success-modal-icon">
+                <i class="fas fa-check"></i>
+              </div>
+              <h3>Mensagem Enviada!</h3>
+              <p>Obrigado por entrar em contato conosco. Retornaremos em breve.</p>
+              <button type="button" class="success-modal-close" onclick="closeSuccessModal()">Fechar</button>
+            </div>
+          </div>
+
+          <div class="contact-info">
+            <div class="contact-card">
+              <h3>Informações de Contato</h3>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Telefone</h4>
+                  <p><a href="tel:+551199999999">(11) 9999-9999</a></p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Email</h4>
+                  <p><a href="mailto:contato@byte.com.br">contato@byte.com.br</a></p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Horário de Atendimento</h4>
+                  <p>Segunda a Sexta: 9h às 18h</p>
+                </div>
+              </div>
+              
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com/byte_ag" class="social-link" aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="WhatsApp">
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="../imgs/Byte.png" alt="by.te logo" width="120" height="40">
+          </div>
+          <p class="footer-about">Somos uma agência digital especializada em transformar ideias em resultados concretos através de soluções digitais inovadoras e estratégicas.</p>
+        </div>
+        
+        <div class="footer-col">
+          <h3 class="footer-heading">Serviços</h3>
+          <ul class="footer-links">
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Desenvolvimento Web</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Social Media</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Gestão de Anúncios</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Google Meu Negócio</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> SEO para Negócios</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Dashboards</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3 class="footer-heading">Links Úteis</h3>
+          <ul class="footer-links">
+            <li><a href="../#about"><i class="fas fa-angle-right"></i> Quem Somos</a></li>
+            <li><a href="../#clients"><i class="fas fa-angle-right"></i> Clientes</a></li>
+            <li><a href="#contact"><i class="fas fa-angle-right"></i> Contato</a></li>
+            <li><a href="#"><i class="fas fa-angle-right"></i> Política de Privacidade</a></li>
+            <li><a href="#"><i class="fas fa-angle-right"></i> Termos de Uso</a></li>
+          </ul>
+        </div>
+        
+        <!-- <div class="footer-col">
+          <h3 class="footer-heading">Newsletter</h3>
+          <p class="footer-newsletter">Inscreva-se para receber nossas novidades e conteúdos exclusivos sobre marketing digital.</p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Seu e-mail" required>
+            <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div> -->
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2025 by.te - Todos os direitos reservados</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com/byte_ag" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    // Validação de formulário de contato
+    document.addEventListener("DOMContentLoaded", function() {
+      const contactForm = document.getElementById("contactForm");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("phone");
+      const nameInput = document.getElementById("name");
+      const emailError = document.getElementById("emailError");
+      const phoneError = document.getElementById("phoneError");
+      const nameError = document.getElementById("nameError");
+
+      // Função para validar email
+      function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      // Função para validar telefone brasileiro
+      function validatePhone(phone) {
+        const cleanPhone = phone.replace(/\D/g, '');
+        return cleanPhone.length >= 10 && cleanPhone.length <= 11;
+      }
+
+      // Máscara para telefone
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, '');
+          if (value.length > 0) {
+            if (value.length <= 10) {
+              value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            } else {
+              value = value.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+            }
+          }
+          e.target.value = value;
+          
+          if (value.length > 0) {
+            const cleanValue = value.replace(/\D/g, '');
+            if (cleanValue.length < 10) {
+              phoneError.textContent = 'Telefone deve ter pelo menos 10 dígitos';
+              phoneError.style.display = 'block';
+              phoneInput.classList.add('error');
+            } else {
+              phoneError.textContent = '';
+              phoneError.style.display = 'none';
+              phoneInput.classList.remove('error');
+            }
+          } else {
+            phoneError.textContent = '';
+            phoneError.style.display = 'none';
+            phoneInput.classList.remove('error');
+          }
+        });
+
+        phoneInput.addEventListener('blur', function(e) {
+          const value = e.target.value.replace(/\D/g, '');
+          if (value.length > 0 && !validatePhone(e.target.value)) {
+            phoneError.textContent = 'Por favor, insira um telefone válido (ex: (11) 99999-9999)';
+            phoneError.style.display = 'block';
+            phoneInput.classList.add('error');
+          }
+        });
+      }
+
+      // Validação de email em tempo real
+      if (emailInput) {
+        emailInput.addEventListener('blur', function(e) {
+          if (e.target.value && !validateEmail(e.target.value)) {
+            emailError.textContent = 'Por favor, insira um email válido';
+            emailError.style.display = 'block';
+            emailInput.classList.add('error');
+          } else {
+            emailError.textContent = '';
+            emailError.style.display = 'none';
+            emailInput.classList.remove('error');
+          }
+        });
+
+        emailInput.addEventListener('input', function(e) {
+          if (emailError.textContent && validateEmail(e.target.value)) {
+            emailError.textContent = '';
+            emailError.style.display = 'none';
+            emailInput.classList.remove('error');
+          }
+        });
+      }
+
+      // Validação de nome
+      if (nameInput) {
+        nameInput.addEventListener('blur', function(e) {
+          if (e.target.value.trim().length < 2) {
+            nameError.textContent = 'Nome deve ter pelo menos 2 caracteres';
+            nameError.style.display = 'block';
+            nameInput.classList.add('error');
+          } else {
+            nameError.textContent = '';
+            nameError.style.display = 'none';
+            nameInput.classList.remove('error');
+          }
+        });
+      }
+
+      // Função para fechar o modal
+      window.closeSuccessModal = function() {
+        const modal = document.getElementById('successModal');
+        if (modal) {
+          modal.classList.remove('active');
+          modal.style.display = 'none';
+          document.documentElement.classList.remove('modal-open');
+          document.body.classList.remove('modal-open');
+        }
+      };
+
+      // Fechar modal ao clicar fora dele
+      const successModal = document.getElementById('successModal');
+      if (successModal) {
+        successModal.addEventListener('click', function(e) {
+          if (e.target === successModal) {
+            closeSuccessModal();
+          }
+        });
+      }
+
+      // Validação e envio do formulário via AJAX
+      if (contactForm) {
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+        const btnLoader = submitBtn ? submitBtn.querySelector('.btn-loader') : null;
+
+        contactForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+
+          let isValid = true;
+
+          // Limpar erros anteriores
+          [nameError, emailError, phoneError].forEach(error => {
+            if (error) {
+              error.textContent = '';
+              error.style.display = 'none';
+            }
+          });
+          [nameInput, emailInput, phoneInput].forEach(input => {
+            if (input) input.classList.remove('error');
+          });
+
+          // Validar nome
+          if (nameInput && nameInput.value.trim().length < 2) {
+            nameError.textContent = 'Nome deve ter pelo menos 2 caracteres';
+            nameError.style.display = 'block';
+            nameInput.classList.add('error');
+            isValid = false;
+          }
+
+          // Validar email
+          if (emailInput && (!emailInput.value || !validateEmail(emailInput.value))) {
+            emailError.textContent = 'Por favor, insira um email válido';
+            emailError.style.display = 'block';
+            emailInput.classList.add('error');
+            isValid = false;
+          }
+
+          // Validar telefone (se preenchido)
+          if (phoneInput && phoneInput.value.trim().length > 0) {
+            if (!validatePhone(phoneInput.value)) {
+              phoneError.textContent = 'Por favor, insira um telefone válido (ex: (11) 99999-9999)';
+              phoneError.style.display = 'block';
+              phoneInput.classList.add('error');
+              isValid = false;
+            }
+          }
+
+          if (!isValid) {
+            const firstError = contactForm.querySelector('.error');
+            if (firstError) {
+              firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              firstError.focus();
+            }
+            return false;
+          }
+
+          // Desabilitar botão e mostrar loader
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            if (btnText) btnText.style.display = 'none';
+            if (btnLoader) btnLoader.style.display = 'inline-flex';
+          }
+
+          try {
+            const formData = new FormData(contactForm);
+
+            const response = await fetch(contactForm.action, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json'
+              },
+              body: formData
+            });
+
+            if (!response.ok) {
+              throw new Error('Falha ao enviar o formulário.');
+            }
+
+            // Sucesso: limpar formulário e exibir modal
+            contactForm.reset();
+            // Restaurar seleção do serviço
+            const serviceSelect = document.getElementById('service');
+            if (serviceSelect) {
+              serviceSelect.value = 'Desenvolvimento Web';
+            }
+            const modal = document.getElementById('successModal');
+            if (modal) {
+              modal.style.cssText = 'display: flex !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; z-index: 999999 !important;';
+              modal.classList.add('active');
+              void modal.offsetHeight;
+              document.documentElement.classList.add('modal-open');
+              document.body.classList.add('modal-open');
+            }
+          } catch (error) {
+            alert('Erro ao enviar mensagem. Por favor, tente novamente mais tarde.');
+            console.error('Erro ao enviar formulário:', error);
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              if (btnText) btnText.style.display = 'inline';
+              if (btnLoader) btnLoader.style.display = 'none';
+            }
+          }
+          return false;
+        }, true);
+      }
+    });
+  </script>
+</body>
+</html>

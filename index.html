@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  
+  <!-- Core Web Vitals -->
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A Agência Digital by.te transforma ideias em resultados. Criação de sites profissionais, SEO, gestão de tráfego e marketing digital para empresas de todos os portes.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="by.te">
+  
+  <!-- Resource Hints - Otimização de Performance -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://formsubmit.co">
+  <link rel="dns-prefetch" href="https://randomuser.me">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://formsubmit.co" crossorigin>
+  
+  <!-- Preload critical resources only -->
+  <link rel="preload" href="imgs/Byte.png" as="image" fetchpriority="high">
+  <link rel="preload" href="css/fonts.css" as="style">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/all.min.css"></noscript>
+  
+  <!-- Fallback for browsers that don't support onload on link -->
+  <script>
+    if(!window.loadCSS){var loadCSS=function(href){var link=document.createElement("link");link.rel="stylesheet";link.href=href;var head=document.getElementsByTagName("head")[0];head.appendChild(link)}}
+  </script>
+  
+  <!-- Estilos para validação de formulário e modal -->
+  <style>
+    .form-group {
+      position: relative;
+    }
+    
+    .error-message {
+      display: none;
+      color: #e74c3c;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      font-weight: 500;
+    }
+    
+    .form-control.error {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+    }
+    
+    .form-control.error:focus {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+    }
+    
+    /* Modal de Sucesso */
+    .success-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(10, 10, 10, 0.9);
+      z-index: 999999;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .success-modal.active {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    /* Prevenir scroll do body quando modal está aberto */
+    body.modal-open {
+      overflow: hidden;
+      height: 100vh;
+    }
+    
+    html.modal-open {
+      overflow: hidden;
+    }
+    
+    .success-modal-content {
+      background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+      border: 2px solid #ffc857;
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 200, 87, 0.2);
+      animation: slideUp 0.4s ease;
+      position: relative;
+      z-index: 1000001;
+      margin: auto;
+    }
+    
+    .success-modal-icon {
+      width: 80px;
+      height: 80px;
+      background: #ffc857;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      animation: scaleIn 0.5s ease;
+      box-shadow: 0 5px 20px rgba(255, 200, 87, 0.4);
+    }
+    
+    .success-modal-icon i {
+      font-size: 40px;
+      color: #0a0a0a;
+    }
+    
+    .success-modal-content h3 {
+      font-size: 28px;
+      color: #ffc857;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(255, 200, 87, 0.3);
+    }
+    
+    .success-modal-content p {
+      font-size: 16px;
+      color: #ffffff;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    
+    .success-modal-close {
+      background: #ffc857;
+      color: #0a0a0a;
+      border: 2px solid #ffc857;
+      padding: 12px 40px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 200, 87, 0.3);
+    }
+    
+    .success-modal-close:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 200, 87, 0.5);
+      background: #ffd977;
+      border-color: #ffd977;
+    }
+    
+    .success-modal-close:active {
+      transform: translateY(0);
+    }
+    
+    .btn-loader {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  </style>
+  
+  <link rel="icon" type="image/png" href="imgs/Byte.png">
+
+  <!-- SEO Básico -->
+  <title>Agência Digital by.te | Criação de Sites Profissionais, SEO e Marketing</title>
+  <meta name="keywords" content="agência digital, criação de sites, marketing digital, SEO, desenvolvimento de sites, gestão de tráfego pago, landing pages, SEO para pequenas empresas">
+  <meta name="author" content="by.te">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.byte-ag.com.br/">
+
+  <!-- Open Graph (Facebook, Instagram, LinkedIn) -->
+  <meta property="og:title" content="By.te - Agência Digital" />
+  <meta property="og:description" content="Soluções digitais completas: criação de sites, gestão de tráfego, redes sociais e dados. Faça sua empresa crescer com a By.te." />
+  <meta property="og:image" content="https://www.byte-ag.com.br/imgs/thumb.jpg" />
+  <meta property="og:url" content="https://www.byte-ag.com.br/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="By.te - Agência Digital" />
+  <meta name="twitter:description" content="Soluções digitais completas: criação de sites, gestão de tráfego, redes sociais e dados. Faça sua empresa crescer com a By.te." />
+  <meta name="twitter:image" content="https://www.byte-ag.com.br/imgs/thumb.jpg" />
+  <meta name="twitter:url" content="https://www.byte-ag.com.br/" />
+
+</head>
+
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WXXCMBMJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+   
+
+
+
+  <a href="https://wa.me/5511999999999" class="whatsapp-button show" id="whatsappButton" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+   
+  
+  <!-- Header -->
+  <header id="header" class="performance-optimized">
+    <div class="container header-container">
+      <a href="#" class="logo" aria-label="By.te - Página inicial">
+        <img src="imgs/Byte.png" alt="by.te logo" width="120" height="40" fetchpriority="high">
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu de navegação">
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <nav aria-label="Menu principal">
+        <ul id="menu">
+          <li><a href="#about">Quem Somos</a></li>
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#clients">Clientes</a></li>
+          <li><a href="#contact">Contato</a></li>
+          <a href="#contact" class="header-cta">Fale conosco</a>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-content">
+        <h1>Transformamos ideias em <span>resultados digitais</span></h1>
+        <p>Soluções completas para impulsionar seu negócio no mundo digital com estratégias personalizadas e tecnologia de ponta.</p>
+        
+        <div class="services-list">
+          <div class="service-tag">Criação de Sites</div>
+          <div class="service-tag">Marketing Digital</div>
+          <div class="service-tag">Gestão de Google Ads</div>
+          <div class="service-tag">Otimização SEO</div>
+          <div class="service-tag">Google Meu Negócio</div>
+          <div class="service-tag">Gestão de Reputação Online</div>
+          <div class="service-tag">Dashboards de Performance</div>
+        </div>
+        
+        <div class="cta-buttons">
+          <a href="#services" class="cta-btn cta-btn-primary">Conheça nossos serviços</a>
+          <a href="#contact" class="cta-btn cta-btn-secondary">Solicite um orçamento</a>
+        </div>
+      </div>
+      
+      <div class="scroll-down" id="scrollDown">
+        <span>Rolar para baixo</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="about-background"></div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Quem <span>Somos</span></h2>
+          <p>Conheça a história e os valores que nos tornam uma agência digital diferenciada</p>
+        </div>
+        
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Nossa História</h3>
+            <p>A <span class="highlight">by.te</span> surgiu da paixão de dois amigos por inovar no digital. Somos uma agência que vai além do marketing: criamos <span class="highlight">soluções sob medida</span>, em parceria com os clientes, para gerar <span class="highlight">resultados reais</span>.</p>
+            
+            <p>Oferecemos soluções estratégicas em marketing, desenvolvidas em cocriação para garantir alinhamento total com seus objetivos de negócio. Nossa metodologia combina expertise técnica e abordagem colaborativa, entregando performance e relacionamentos de longo prazo.</p>
+            
+            <div class="slogan">Resultados reais começam com parcerias reais.</div>
+          </div>
+          
+          <div class="about-values">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <h4 class="feature-title">Missão</h4>
+              <p class="feature-text">Transformar negócios através de soluções digitais inovadoras e resultados mensuráveis.</p>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-eye"></i>
+              </div>
+              <h4 class="feature-title">Visão</h4>
+              <p class="feature-text">Ser referência em transformação digital e parceiro estratégico de longo prazo para nossos clientes.</p>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h4 class="feature-title">Valores</h4>
+              <p class="feature-text">Transparência, inovação, excelência técnica e foco em resultados mensuráveis.</p>
+            </div>
+          </div>
+          
+          <div class="about-image">
+            <img src="imgs/quemsomos-1.webp" alt="Equipe by.te trabalhando" loading="lazy" width="400" height="300">
+            <img src="imgs/quemsomos2.webp" alt="Reunião estratégica da equipe by.te" loading="lazy" width="400" height="300">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+      <div class="services-background"></div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Nossos <span>Serviços</span></h2>
+          <p>Soluções completas para impulsionar sua presença digital e conquistar resultados expressivos</p>
+        </div>
+        
+        <div class="services-grid">
+          <!-- Serviço 1: Desenvolvimento Web -->
+          <a href="/servicos/criacao-de-sites.html" class="service-card">
+            <div class="service-image">
+              <img src="imgs/devweb.webp" alt="Desenvolvimento Web" loading="lazy" width="300" height="200">
+            </div>
+            <div class="service-content">
+              <div class="service-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <h3 class="service-title">Desenvolvimento Web</h3>
+              <p class="service-description">Sites profissionais, responsivos e otimizados para conversão que representam sua marca com excelência.</p>
+              <div class="service-features">
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Sites Institucionais</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>E-commerce Completo</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Landing Pages de Conversão</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Aplicações Web Personalizadas</span>
+                </div>
+              </div>
+              <span class="service-link">Solicite seu site</span>
+            </div>
+          </a>
+          
+          <!-- Serviço 2: Social Media -->
+          <a href="/servicos/gestao-de-redes-sociais.html" class="service-card">
+            <div class="service-image">
+              <img src="imgs/socialmedia.webp" alt="Social Media" loading="lazy" width="300" height="200">
+            </div>
+            <div class="service-content">
+              <div class="service-icon">
+                <i class="fas fa-hashtag"></i>
+              </div>
+              <h3 class="service-title">Social Media</h3>
+              <p class="service-description">Estratégias de conteúdo que conectam sua marca ao público-alvo e geram engajamento genuíno.</p>
+              <div class="service-features">
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Planejamento de Conteúdo</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Criação de Posts Atrativos</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Gestão de Comunidade</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Relatórios de Performance</span>
+                </div>
+              </div>
+              <span class="service-link">Solicite um orçamento</span>
+            </div>
+          </a>
+          
+          <!-- Serviço 3: Gestão de Anúncios -->
+          <a href="/servicos/gestao-de-trafego-pago.html" class="service-card">
+            <div class="service-image">
+              <img src="imgs/ads.webp" alt="Gestão de Anúncios" loading="lazy" width="300" height="200">
+            </div>
+            <div class="service-content">
+              <div class="service-icon">
+                <i class="fas fa-ad"></i>
+              </div>
+              <h3 class="service-title">Gestão de Anúncios</h3>
+              <p class="service-description">Campanhas de anúncios estratégicas que atraem clientes qualificados e maximizam seu ROI.</p>
+              <div class="service-features">
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Anúncios de Pesquisa</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Campanhas de Display</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Remarketing Estratégico</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Otimização de Conversões</span>
+                </div>
+              </div>
+              <span class="service-link">Solicite um orçamento</span>
+            </div>
+          </a>
+
+           <!-- Serviço 5: SEO para Negócios -->
+           <a href="/servicos/seo-para-negocios.html" class="service-card">
+            <div class="service-image">
+              <img src="imgs/seo.webp" alt="SEO para Negócios" loading="lazy" width="300" height="200">
+            </div>
+            <div class="service-content">
+              <div class="service-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <h3 class="service-title">SEO para Negócios</h3>
+              <p class="service-description">Estratégias para melhorar a reputação online da sua empresa e conquistar a confiança dos clientes.</p>
+              <div class="service-features">
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Monitoramento de Avaliações</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Resposta Profissional a Comentários</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Estratégias para Aumentar Avaliações Positivas</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Gestão de Crises de Reputação</span>
+                </div>
+              </div>
+              <span class="service-link">Solicite um orçamento</span>
+            </div>
+          </a>
+          
+          <!-- Serviço 4: Google Meu Negócio (NOVO) -->
+          <a href="/servicos/google-meu-negocio.html" class="service-card">
+            <div class="service-image">
+              <img src="imgs/googlemybus.webp" alt="Google Meu Negócio" loading="lazy" width="300" height="200">
+            </div>
+            <div class="service-content">
+              <div class="service-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <h3 class="service-title">Google Meu Negócio</h3>
+              <p class="service-description">Otimização completa da sua presença local para atrair clientes próximos e aumentar a visibilidade.</p>
+              <div class="service-features">
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Configuração e Otimização de Perfil</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Gestão de Informações e Fotos</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Publicações Estratégicas</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Gestão de avaliações</span>
+                </div>
+              </div>
+              <span class="service-link">Solicite um orçamento</span>
+            </div>
+          </a>
+          
+         
+          
+          <!-- Serviço 6: Dashboards -->
+          <a href="/servicos/dashboards.html" class="service-card">
+            <div class="service-image">
+              <img src="imgs/dash.webp" alt="Dashboards Personalizados" loading="lazy" width="300" height="200">
+            </div>
+            <div class="service-content">
+              <div class="service-icon">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+              <h3 class="service-title">Dashboards</h3>
+              <p class="service-description">Painéis de dados personalizados que transformam informações em insights estratégicos para seu negócio.</p>
+              <div class="service-features">
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Indicadores de Performance (KPIs)</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Visualização de Dados Interativa</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Integração com Múltiplas Fontes</span>
+                </div>
+                <div class="service-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Relatórios Automatizados</span>
+                </div>
+              </div>
+              <span class="service-link">Solicite um orçamento</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Section -->
+    <section class="tech-section">
+      <div class="tecnologias-background"></div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Nossas <span>Tecnologias</span></h2>
+          <p>Utilizamos as melhores ferramentas e tecnologias do mercado para entregar resultados excepcionais</p>
+        </div>
+        
+        <div class="tech-grid">
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" loading="lazy" width="40" height="40">
+            </div>
+            <span class="tech-name">HTML5</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" loading="lazy" width="40" height="40">
+            </div>
+            <span class="tech-name">CSS3</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" width="40" height="40">
+            </div>
+            <span class="tech-name">JavaScript</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" loading="lazy" width="40" height="40">
+            </div>
+            <span class="tech-name">WordPress</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Gestão de Anúncios" loading="lazy" width="40" height="40">
+            </div>
+            <span class="tech-name">Gestão de Anúncios</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg" alt="Power BI" loading="lazy" width="40" height="40">
+            </div>
+            <span class="tech-name">Power BI</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" loading="lazy" width="40" height="40">
+            </div>
+            <span class="tech-name">SQL</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Cloud" loading="lazy" width="40" height="40">
+            </div>
+            <span class="tech-name">Cloud</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clients Section (Combinando Portfólio e Depoimentos) -->
+    <section id="clients" class="clients-section">
+      <div class="clients-background"></div>
+
+      <div class="container">
+        <div class="section-header">
+          <h2>Nossos <span>Clientes</span></h2>
+          <p>Conheça alguns dos projetos que desenvolvemos e o que nossos clientes dizem sobre nós</p>
+        </div>
+        
+        <!-- Portfolio Grid -->
+        <div class="portfolio-section">
+          <h3 class="subsection-title">Projetos de Sucesso</h3>
+          
+          <!-- <div class="portfolio-filters">
+            <button class="portfolio-filter active" data-filter="all">Todos</button>
+            <button class="portfolio-filter" data-filter="web">Websites</button>
+            <button class="portfolio-filter" data-filter="social">Social Media</button>
+            <button class="portfolio-filter" data-filter="ads">Campanhas</button>
+            <button class="portfolio-filter" data-filter="google">Google Meu Negócio</button>
+          </div> -->
+          
+          <div class="portfolio-grid">
+            <!-- Projeto 1 -->
+            <div class="portfolio-item" data-category="web">
+              <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Kings 3D" class="portfolio-image" loading="lazy" width="300" height="300">
+              <div class="portfolio-overlay">
+                <h3 class="portfolio-title">Kings 3D</h3>
+                <p class="portfolio-category">Desenvolvimento Web</p>
+                <a href="#" class="portfolio-link">Ver projeto</a>
+              </div>
+            </div>
+            
+            <!-- Projeto 2 -->
+            <div class="portfolio-item" data-category="social">
+              <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="EMPL" class="portfolio-image" loading="lazy" width="300" height="300">
+              <div class="portfolio-overlay">
+                <h3 class="portfolio-title">EMPL</h3>
+                <p class="portfolio-category">Social Media</p>
+                <a href="#" class="portfolio-link">Ver projeto</a>
+              </div>
+            </div>
+            
+            <!-- Projeto 3 -->
+            <div class="portfolio-item" data-category="ads">
+              <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="FoodDelivery" class="portfolio-image" loading="lazy" width="300" height="300">
+              <div class="portfolio-overlay">
+                <h3 class="portfolio-title">FoodDelivery</h3>
+                <p class="portfolio-category">Campanhas de Ads</p>
+                <a href="#" class="portfolio-link">Ver projeto</a>
+              </div>
+            </div>
+            
+            <!-- Projeto 4 (Google Meu Negócio) -->
+            <!-- <div class="portfolio-item" data-category="google">
+              <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Restaurante Local" class="portfolio-image">
+              <div class="portfolio-overlay">
+                <h3 class="portfolio-title">Restaurante Local</h3>
+                <p class="portfolio-category">Google Meu Negócio</p>
+                <a href="#" class="portfolio-link">Ver projeto</a>
+              </div>
+            </div> -->
+            
+            <!-- Projeto 5 (Gestão de Avaliações) -->
+            <!-- <div class="portfolio-item" data-category="google">
+              <img src="https://images.unsplash.com/photo-1569098644584-210bcd375b59?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Clínica Médica" class="portfolio-image">
+              <div class="portfolio-overlay">
+                <h3 class="portfolio-title">Clínica Médica</h3>
+                <p class="portfolio-category">Gestão de Avaliações</p>
+                <a href="#" class="portfolio-link">Ver projeto</a>
+              </div>
+            </div> -->
+            
+            <!-- Projeto 6 -->
+            <!-- <div class="portfolio-item" data-category="web">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Dashboard Corporativo" class="portfolio-image">
+              <div class="portfolio-overlay">
+                <h3 class="portfolio-title">Dashboard Corporativo</h3>
+                <p class="portfolio-category">Business Intelligence</p>
+                <a href="#" class="portfolio-link">Ver projeto</a>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        
+        <!-- Testimonials Section -->
+        <div class="testimonials-section">
+          <h3 class="subsection-title">O que nossos clientes dizem</h3>
+          
+          <div class="testimonials-container">
+            <div class="testimonial-slider" id="testimonialSlider">
+              <!-- Depoimento 1 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="testimonial-content">
+                    <p class="testimonial-text">"A by.te transformou completamente nossa presença digital. O site ficou incrível e as estratégias de marketing trouxeram resultados muito além do esperado. A equipe é extremamente profissional e atenciosa."</p>
+                  </div>
+                  <div class="testimonial-author">
+                    <div class="author-image">
+                      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="João Silva" loading="lazy" width="60" height="60">
+                    </div>
+                    <div class="author-info">
+                      <h4>João Silva</h4>
+                      <p>CEO, Kings 3D</p>
+                      <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Depoimento 2 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="testimonial-content">
+                    <p class="testimonial-text">"Desde que começamos a trabalhar com a by.te, nossas vendas online aumentaram em 150%. A gestão do Google Meu Negócio e das avaliações melhorou significativamente nossa reputação local. Recomendo fortemente!"</p>
+                  </div>
+                  <div class="testimonial-author">
+                    <div class="author-image">
+                      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Maria Oliveira" loading="lazy" width="60" height="60">
+                    </div>
+                    <div class="author-info">
+                      <h4>Maria Oliveira</h4>
+                      <p>Diretora, EMPL</p>
+                      <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Depoimento 3 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="testimonial-content">
+                    <p class="testimonial-text">"As campanhas de Google Ads desenvolvidas pela by.te trouxeram um ROI excepcional para nosso negócio. O dashboard personalizado nos permite acompanhar os resultados em tempo real e tomar decisões mais assertivas."</p>
+                  </div>
+                  <div class="testimonial-author">
+                    <div class="author-image">
+                      <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Carlos Santos" loading="lazy" width="60" height="60">
+                    </div>
+                    <div class="author-info">
+                      <h4>Carlos Santos</h4>
+                      <p>Gerente de Marketing, FoodDelivery</p>
+                      <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="testimonial-controls">
+              <div class="testimonial-dot active" data-slide="0"></div>
+              <div class="testimonial-dot" data-slide="1"></div>
+              <div class="testimonial-dot" data-slide="2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="faq-background"></div>
+
+      <div class="container">
+        <div class="section-header">
+          <h2>Perguntas <span>Frequentes</span></h2>
+          <p>Tire suas dúvidas sobre nossos serviços e como podemos ajudar seu negócio</p>
+        </div>
+        
+        <div class="faq-container">
+          <!-- Pergunta 1 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Como o Google Meu Negócio pode ajudar minha empresa?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>O Google Meu Negócio é essencial para empresas locais, pois aumenta sua visibilidade nas pesquisas locais e no Google Maps. Uma ficha bem otimizada melhora seu posicionamento, facilita que clientes encontrem informações importantes como horário de funcionamento e localização, além de permitir interação através de avaliações e perguntas. Nosso serviço inclui configuração completa, otimização de perfil, gestão de fotos e informações, publicações estratégicas e monitoramento de posicionamento local.</p>
+            </div>
+          </div>
+          
+          <!-- Pergunta 2 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Por que a gestão de avaliações é importante para meu negócio?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>As avaliações online são um fator decisivo para novos clientes, com mais de 90% dos consumidores consultando-as antes de fazer uma compra ou contratar um serviço. Uma boa gestão de avaliações aumenta a credibilidade da sua marca, melhora o posicionamento em buscas locais e ajuda a identificar pontos de melhoria no seu negócio. Nosso serviço inclui monitoramento constante, resposta profissional a todos os comentários (positivos e negativos), estratégias para aumentar o volume de avaliações positivas e gestão de crises de reputação.</p>
+            </div>
+          </div>
+          
+          <!-- Pergunta 3 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Quanto tempo leva para ver resultados com marketing digital?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>O tempo para resultados varia conforme a estratégia. Campanhas de Google Ads podem gerar tráfego imediato, enquanto SEO e marketing de conteúdo são estratégias de médio a longo prazo, geralmente mostrando resultados significativos entre 3 e 6 meses. Social media costuma apresentar crescimento gradual de engajamento ao longo de 2-3 meses. Trabalhamos com relatórios transparentes para que você acompanhe a evolução desde o início, com métricas claras e objetivos bem definidos.</p>
+            </div>
+          </div>
+          
+          <!-- Pergunta 4 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Como os dashboards podem ajudar na tomada de decisões?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Dashboards transformam dados complexos em visualizações intuitivas que facilitam a compreensão e a tomada de decisões. Eles centralizam informações de diferentes fontes, permitem acompanhamento em tempo real dos KPIs mais importantes, identificam tendências e oportunidades que poderiam passar despercebidas em relatórios tradicionais, e economizam tempo na análise de dados. Desenvolvemos dashboards personalizados que se integram às suas fontes de dados existentes e focam nos indicadores mais relevantes para seu negócio.</p>
+            </div>
+          </div>
+          
+          <!-- Pergunta 5 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Vocês atendem pequenas empresas ou apenas grandes corporações?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Atendemos empresas de todos os portes, desde pequenos negócios locais até grandes corporações. Nossas soluções são escaláveis e personalizadas de acordo com as necessidades e orçamento de cada cliente. Acreditamos que toda empresa merece uma presença digital de qualidade, independentemente do seu tamanho. Oferecemos pacotes específicos para pequenas empresas que desejam iniciar sua jornada digital com investimento acessível e retorno garantido.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Fale <span>Conosco</span></h2>
+          <p>Estamos prontos para transformar seu negócio digital. Entre em contato!</p>
+        </div>
+        
+        <div class="contact-container">
+          <div class="contact-form">
+            <div class="form-container">
+              <form id="contactForm" action="https://formsubmit.co/contato@byte-ag.com.br" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_subject" value="Nova mensagem do site by.te">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="box">
+                
+                <div class="form-row">
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="name" class="form-label">Nome</label>
+                      <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome" required>
+                      <span class="error-message" id="nameError"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" id="email" name="email" class="form-control" placeholder="Seu email" required>
+                      <span class="error-message" id="emailError"></span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="phone" class="form-label">Telefone</label>
+                      <input type="tel" id="phone" name="phone" class="form-control" placeholder="(11) 99999-9999">
+                      <span class="error-message" id="phoneError"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="company" class="form-label">Empresa</label>
+                      <input type="text" id="company" name="company" class="form-control" placeholder="Sua empresa">
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="service" class="form-label">Serviço de Interesse</label>
+                  <select id="service" name="service" class="form-control" required>
+                    <option value="" selected disabled>Selecione um serviço</option>
+                    <option value="Desenvolvimento Web">Desenvolvimento Web</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Gestão de Anúncios">Gestão de Anúncios</option>
+                    <option value="Google Meu Negócio">Google Meu Negócio</option>
+                    <option value="Gestão de Avaliações">Gestão de Avaliações</option>
+                    <option value="Dashboards">Dashboards</option>
+                    <option value="Outro">Outro</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="message" class="form-label">Mensagem</label>
+                  <textarea id="message" name="message" class="form-control" placeholder="Como podemos ajudar?" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                  <span class="btn-text">Enviar Mensagem</span>
+                  <span class="btn-loader" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> Enviando...
+                  </span>
+                </button>
+              </form>
+            </div>
+          </div>
+          
+          <!-- Modal de Sucesso -->
+          <div id="successModal" class="success-modal">
+            <div class="success-modal-content">
+              <div class="success-modal-icon">
+                <i class="fas fa-check"></i>
+              </div>
+              <h3>Mensagem Enviada!</h3>
+              <p>Obrigado por entrar em contato conosco. Retornaremos em breve.</p>
+              <button type="button" class="success-modal-close" onclick="closeSuccessModal()">Fechar</button>
+            </div>
+          </div>
+
+          <div class="contact-info">
+            <div class="contact-card">
+              <h3>Informações de Contato</h3>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Telefone</h4>
+                  <p><a href="tel:+551199999999">(11) 9999-9999</a></p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Email</h4>
+                  <p><a href="mailto:contato@byte.com.br">contato@byte.com.br</a></p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Horário de Atendimento</h4>
+                  <p>Segunda a Sexta: 9h às 18h</p>
+                </div>
+              </div>
+              
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com/byte_ag" class="social-link" aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="WhatsApp">
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="/imgs/Byte.png" alt="by.te logo" width="187" height="114" loading="lazy">
+          </div>
+          <p class="footer-about">Somos uma agência digital especializada em transformar ideias em resultados concretos através de soluções digitais inovadoras e estratégicas.</p>
+        </div>
+        
+        <div class="footer-col">
+          <h3 class="footer-heading">Serviços</h3>
+          <ul class="footer-links">
+            <li><a href="#services"><i class="fas fa-angle-right"></i> Desenvolvimento Web</a></li>
+            <li><a href="#services"><i class="fas fa-angle-right"></i> Social Media</a></li>
+            <li><a href="#services"><i class="fas fa-angle-right"></i> Gestão de Anúncios</a></li>
+            <li><a href="#services"><i class="fas fa-angle-right"></i> Google Meu Negócio</a></li>
+            <li><a href="#services"><i class="fas fa-angle-right"></i> Gestão de Avaliações</a></li>
+            <li><a href="#services"><i class="fas fa-angle-right"></i> Dashboards</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3 class="footer-heading">Links Úteis</h3>
+          <ul class="footer-links">
+            <li><a href="#about"><i class="fas fa-angle-right"></i> Quem Somos</a></li>
+            <li><a href="#clients"><i class="fas fa-angle-right"></i> Clientes</a></li>
+            <li><a href="#contact"><i class="fas fa-angle-right"></i> Contato</a></li>
+            <li><a href="#"><i class="fas fa-angle-right"></i> Política de Privacidade</a></li>
+            <li><a href="#"><i class="fas fa-angle-right"></i> Termos de Uso</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2025 by.te - Todos os direitos reservados</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com/byte_ag" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script loader for async CSS -->
+  <script>
+    /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+    (function(w){"use strict";if(!w.loadCSS){w.loadCSS=function(href,before,media){var doc=w.document;var ss=doc.createElement("link");var ref;if(before){ref=before}else{var refs=(doc.body||doc.getElementsByTagName("head")[0]).childNodes;ref=refs[refs.length-1]}var sheets=doc.styleSheets;ss.rel="stylesheet";ss.href=href;ss.media="only x";function ready(cb){if(doc.body){return cb()}setTimeout(function(){ready(cb)})}ready(function(){ref.parentNode.insertBefore(ss,before?ref:ref.nextSibling)});var onloadcssdefined=function(cb){var resolvedHref=ss.href;var i=sheets.length;while(i--){if(sheets[i].href===resolvedHref){return cb()}setTimeout(function(){onloadcssdefined(cb)})}};ss.onloadcssdefined=onloadcssdefined;onloadcssdefined(function(){if(ss.media!=="all"){ss.media=media||"all"}});return ss}}})(typeof global!=="undefined"?global:this);
+  </script>
+  
+  <!-- Non-critical scripts -->
+  <script src="script.js" defer></script>
+  <script>
+    // Lazy load images
+    document.addEventListener("DOMContentLoaded", function() {
+      var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+      if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target;
+              lazyImage.src = lazyImage.dataset.src;
+              lazyImage.classList.remove("lazy");
+              lazyImageObserver.unobserve(lazyImage);
+            }
+          });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage);
+        });
+      }
+    });
+
+    // Validação de formulário de contato
+    document.addEventListener("DOMContentLoaded", function() {
+      const contactForm = document.getElementById("contactForm");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("phone");
+      const nameInput = document.getElementById("name");
+      const emailError = document.getElementById("emailError");
+      const phoneError = document.getElementById("phoneError");
+      const nameError = document.getElementById("nameError");
+
+      // Função para validar email
+      function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      // Função para validar telefone brasileiro
+      function validatePhone(phone) {
+        // Remove todos os caracteres não numéricos
+        const cleanPhone = phone.replace(/\D/g, '');
+        // Aceita telefone com 10 ou 11 dígitos (com ou sem DDD)
+        // Formato: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
+        return cleanPhone.length >= 10 && cleanPhone.length <= 11;
+      }
+
+      // Máscara para telefone
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, '');
+          if (value.length > 0) {
+            if (value.length <= 10) {
+              // Telefone fixo: (XX) XXXX-XXXX
+              value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            } else {
+              // Celular: (XX) XXXXX-XXXX
+              value = value.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+            }
+          }
+          e.target.value = value;
+          
+          // Validação em tempo real
+          if (value.length > 0) {
+            const cleanValue = value.replace(/\D/g, '');
+            if (cleanValue.length < 10) {
+              phoneError.textContent = 'Telefone deve ter pelo menos 10 dígitos';
+              phoneError.style.display = 'block';
+              phoneInput.classList.add('error');
+            } else {
+              phoneError.textContent = '';
+              phoneError.style.display = 'none';
+              phoneInput.classList.remove('error');
+            }
+          } else {
+            phoneError.textContent = '';
+            phoneError.style.display = 'none';
+            phoneInput.classList.remove('error');
+          }
+        });
+
+        phoneInput.addEventListener('blur', function(e) {
+          const value = e.target.value.replace(/\D/g, '');
+          if (value.length > 0 && !validatePhone(e.target.value)) {
+            phoneError.textContent = 'Por favor, insira um telefone válido (ex: (11) 99999-9999)';
+            phoneError.style.display = 'block';
+            phoneInput.classList.add('error');
+          }
+        });
+      }
+
+      // Validação de email em tempo real
+      if (emailInput) {
+        emailInput.addEventListener('blur', function(e) {
+          if (e.target.value && !validateEmail(e.target.value)) {
+            emailError.textContent = 'Por favor, insira um email válido';
+            emailError.style.display = 'block';
+            emailInput.classList.add('error');
+          } else {
+            emailError.textContent = '';
+            emailError.style.display = 'none';
+            emailInput.classList.remove('error');
+          }
+        });
+
+        emailInput.addEventListener('input', function(e) {
+          if (emailError.textContent && validateEmail(e.target.value)) {
+            emailError.textContent = '';
+            emailError.style.display = 'none';
+            emailInput.classList.remove('error');
+          }
+        });
+      }
+
+      // Validação de nome
+      if (nameInput) {
+        nameInput.addEventListener('blur', function(e) {
+          if (e.target.value.trim().length < 2) {
+            nameError.textContent = 'Nome deve ter pelo menos 2 caracteres';
+            nameError.style.display = 'block';
+            nameInput.classList.add('error');
+          } else {
+            nameError.textContent = '';
+            nameError.style.display = 'none';
+            nameInput.classList.remove('error');
+          }
+        });
+      }
+
+      // Função para fechar o modal
+      window.closeSuccessModal = function() {
+        const modal = document.getElementById('successModal');
+        if (modal) {
+          modal.classList.remove('active');
+          modal.style.display = 'none';
+          document.documentElement.classList.remove('modal-open');
+          document.body.classList.remove('modal-open');
+        }
+      };
+
+      // Fechar modal ao clicar fora dele
+      const successModal = document.getElementById('successModal');
+      if (successModal) {
+        successModal.addEventListener('click', function(e) {
+          if (e.target === successModal) {
+            closeSuccessModal();
+          }
+        });
+      }
+
+      // Validação e envio do formulário via AJAX
+      if (contactForm) {
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+        const btnLoader = submitBtn ? submitBtn.querySelector('.btn-loader') : null;
+
+        contactForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+
+          let isValid = true;
+
+          // Limpar erros anteriores
+          [nameError, emailError, phoneError].forEach(error => {
+            if (error) {
+              error.textContent = '';
+              error.style.display = 'none';
+            }
+          });
+          [nameInput, emailInput, phoneInput].forEach(input => {
+            if (input) input.classList.remove('error');
+          });
+
+          // Validar nome
+          if (nameInput && nameInput.value.trim().length < 2) {
+            nameError.textContent = 'Nome deve ter pelo menos 2 caracteres';
+            nameError.style.display = 'block';
+            nameInput.classList.add('error');
+            isValid = false;
+          }
+
+          // Validar email
+          if (emailInput && (!emailInput.value || !validateEmail(emailInput.value))) {
+            emailError.textContent = 'Por favor, insira um email válido';
+            emailError.style.display = 'block';
+            emailInput.classList.add('error');
+            isValid = false;
+          }
+
+          // Validar telefone (se preenchido)
+          if (phoneInput && phoneInput.value.trim().length > 0) {
+            if (!validatePhone(phoneInput.value)) {
+              phoneError.textContent = 'Por favor, insira um telefone válido (ex: (11) 99999-9999)';
+              phoneError.style.display = 'block';
+              phoneInput.classList.add('error');
+              isValid = false;
+            }
+          }
+
+          if (!isValid) {
+            // Scroll para o primeiro erro
+            const firstError = contactForm.querySelector('.error');
+            if (firstError) {
+              firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              firstError.focus();
+            }
+            return false;
+          }
+
+          // Desabilitar botão e mostrar loader
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            if (btnText) btnText.style.display = 'none';
+            if (btnLoader) btnLoader.style.display = 'inline-flex';
+          }
+
+          try {
+            const formData = new FormData(contactForm);
+
+            const response = await fetch(contactForm.action, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json'
+              },
+              body: formData
+            });
+
+            if (!response.ok) {
+              throw new Error('Falha ao enviar o formulário.');
+            }
+
+            // Sucesso: limpar formulário e exibir modal
+            contactForm.reset();
+            const modal = document.getElementById('successModal');
+            if (modal) {
+              modal.style.cssText = 'display: flex !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; z-index: 999999 !important;';
+              modal.classList.add('active');
+              void modal.offsetHeight;
+              document.documentElement.classList.add('modal-open');
+              document.body.classList.add('modal-open');
+            }
+          } catch (error) {
+            alert('Erro ao enviar mensagem. Por favor, tente novamente mais tarde.');
+            console.error('Erro ao enviar formulário (fetch):', error);
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              if (btnText) btnText.style.display = 'inline';
+              if (btnLoader) btnLoader.style.display = 'none';
+            }
+          }
+          return false;
+        }, true);
+      }
+    });
+  </script>
+  
+  <!-- Google Tag Manager - Moved to end for better performance -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.defer=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WXXCMBMJ');
+  </script>
+  <!-- End Google Tag Manager -->
+</body>
+
+
+</html>

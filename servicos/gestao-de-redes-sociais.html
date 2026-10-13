@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WXXCMBMJ');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/all.min.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/servicos.css">
+  <link rel="icon" type="image/png" href="../imgs/Byte.png">
+  
+  <!-- Estilos para validação de formulário e modal -->
+  <style>
+    .form-group {
+      position: relative;
+    }
+    
+    .error-message {
+      display: none;
+      color: #e74c3c;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      font-weight: 500;
+    }
+    
+    .form-control.error {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+    }
+    
+    .form-control.error:focus {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+    }
+    
+    /* Modal de Sucesso */
+    .success-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(10, 10, 10, 0.9);
+      z-index: 999999;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .success-modal.active {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    /* Prevenir scroll do body quando modal está aberto */
+    body.modal-open {
+      overflow: hidden;
+      height: 100vh;
+    }
+    
+    html.modal-open {
+      overflow: hidden;
+    }
+    
+    .success-modal-content {
+      background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+      border: 2px solid #ffc857;
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 200, 87, 0.2);
+      animation: slideUp 0.4s ease;
+      position: relative;
+      z-index: 1000001;
+      margin: auto;
+    }
+    
+    .success-modal-icon {
+      width: 80px;
+      height: 80px;
+      background: #ffc857;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      animation: scaleIn 0.5s ease;
+      box-shadow: 0 5px 20px rgba(255, 200, 87, 0.4);
+    }
+    
+    .success-modal-icon i {
+      font-size: 40px;
+      color: #0a0a0a;
+    }
+    
+    .success-modal-content h3 {
+      font-size: 28px;
+      color: #ffc857;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(255, 200, 87, 0.3);
+    }
+    
+    .success-modal-content p {
+      font-size: 16px;
+      color: #ffffff;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    
+    .success-modal-close {
+      background: #ffc857;
+      color: #0a0a0a;
+      border: 2px solid #ffc857;
+      padding: 12px 40px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 200, 87, 0.3);
+    }
+    
+    .success-modal-close:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 200, 87, 0.5);
+      background: #ffd977;
+      border-color: #ffd977;
+    }
+    
+    .success-modal-close:active {
+      transform: translateY(0);
+    }
+    
+    .btn-loader {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  </style>
+
+  <!-- SEO -->
+  <title>Gestão de Redes Sociais Profissional | by.te Agência Digital</title>
+  <meta name="description" content="Impulsione sua presença digital com conteúdo estratégico e engajamento real nas redes sociais. Gestão profissional de redes sociais para sua empresa.">
+  
+  <!-- Open Graph (Facebook, Instagram, LinkedIn) -->
+  <meta property="og:title" content="Gestão de Redes Sociais - By.te Agência Digital" />
+  <meta property="og:description" content="Impulsione sua presença digital com conteúdo estratégico e engajamento real nas redes sociais." />
+  <meta property="og:image" content="https://www.byte-ag.com.br/imgs/thumb.jpg" />
+  <meta property="og:url" content="https://www.byte-ag.com.br/servicos/gestao-de-redes-sociais.html" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gestão de Redes Sociais - By.te Agência Digital" />
+  <meta name="twitter:description" content="Impulsione sua presença digital com conteúdo estratégico e engajamento real nas redes sociais." />
+  <meta name="twitter:image" content="https://www.byte-ag.com.br/imgs/thumb.jpg" />
+  <meta name="twitter:url" content="https://www.byte-ag.com.br/servicos/gestao-de-redes-sociais.html" />
+
+  <meta name="keywords" content="gestão de redes sociais, social media, marketing digital, conteúdo para redes sociais">
+  <meta name="author" content="by.te">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.byte-ag.com.br/servicos/gestao-de-redes-sociais.html">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WXXCMBMJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+  <!-- Botão para voltar ao topo -->
+  <div class="scroll-to-top" id="scrollToTop" role="button" aria-label="Voltar ao topo">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </div>
+
+  <!-- Header -->
+  <header id="header" class="performance-optimized">
+    <div class="container header-container">
+      <a href="../" class="logo" aria-label="By.te - Página inicial">
+        <img src="../imgs/Byte.png" alt="by.te logo" width="120" height="40" fetchpriority="high">
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu de navegação">
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <nav aria-label="Menu principal">
+        <ul id="menu">
+          <li><a href="../#about">Quem Somos</a></li>
+          <li><a href="../#services">Serviços</a></li>
+          <li><a href="../#clients">Clientes</a></li>
+          <li><a href="#contact">Contato</a></li>
+          <li><a href="#contact" class="header-cta">Fale conosco</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Banner Hero Responsivo -->
+    <section class="hero-banner">
+      <div class="hero-banner-content">
+        <h1>Gestão de <span>Redes Sociais</span></h1>
+        <p>Transformamos sua presença digital em uma estratégia que conecta, engaja e converte seguidores em clientes.</p>
+        
+        <div class="services-list">
+          <div class="service-tag">Instagram</div>
+          <div class="service-tag">Facebook</div>
+          <div class="service-tag">LinkedIn</div>
+          <div class="service-tag">TikTok</div>
+        </div>
+        
+        <div class="cta-buttons" style="margin-top: 30px;">
+          <a href="#contact" class="cta-btn cta-btn-primary">Solicitar orçamento</a>
+          <a href="https://wa.me/5500000000000?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20gestão%20de%20redes%20sociais" class="cta-btn cta-btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conteúdo Principal -->
+    <section class="about-section">
+      <div class="about-background"></div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Por que escolher a <span>by.te</span>?</h2>
+          <p>Gestão de redes sociais estratégica focada em resultados</p>
+        </div>
+        
+        <div class="service-features-grid">
+          <div class="service-feature-card">
+            <i class="fas fa-pencil-alt"></i>
+            <h3>Criação de Conteúdo</h3>
+            <p>Produção de posts, stories, reels e vídeos alinhados à sua identidade de marca, com foco em engajamento e conversão.</p>
+          </div>
+          
+          <div class="service-feature-card">
+            <i class="fas fa-calendar-alt"></i>
+            <h3>Planejamento Estratégico</h3>
+            <p>Calendário editorial personalizado para cada plataforma, com conteúdo otimizado para cada rede social.</p>
+          </div>
+          
+          <div class="service-feature-card">
+            <i class="fas fa-comments"></i>
+            <h3>Gerenciamento de Comunidade</h3>
+            <p>Interação com seguidores, respostas a comentários e monitoramento de menções para fortalecer sua presença digital.</p>
+          </div>
+          
+          <div class="service-feature-card">
+            <i class="fas fa-chart-bar"></i>
+            <h3>Análise de Resultados</h3>
+            <p>Relatórios mensais detalhados com métricas de crescimento, engajamento e conversão para otimização contínua.</p>
+          </div>
+        </div>
+        
+        <div class="section-header" style="margin-top: 80px;">
+          <h2>Nosso <span>Processo</span></h2>
+          <p>Como transformamos sua presença nas redes sociais</p>
+        </div>
+        
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="process-step-number">1</div>
+            <h3>Análise e Diagnóstico</h3>
+            <p>Avaliamos sua presença atual nas redes sociais, identificando pontos fortes e oportunidades de melhoria.</p>
+          </div>
+          
+          <div class="process-step">
+            <div class="process-step-number">2</div>
+            <h3>Planejamento Estratégico</h3>
+            <p>Desenvolvemos uma estratégia personalizada com objetivos claros e métricas de sucesso.</p>
+          </div>
+          
+          <div class="process-step">
+            <div class="process-step-number">3</div>
+            <h3>Criação de Conteúdo</h3>
+            <p>Produzimos conteúdo relevante e engajante para cada plataforma, mantendo sua identidade de marca.</p>
+          </div>
+          
+          <div class="process-step">
+            <div class="process-step-number">4</div>
+            <h3>Implementação</h3>
+            <p>Publicamos conteúdo regularmente e gerenciamos sua comunidade com interações autênticas.</p>
+          </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="#contact" class="cta-btn cta-btn-primary">Solicitar orçamento</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tecnologias Section -->
+    <section class="tech-section">
+      <div class="tecnologias-background"></div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Ferramentas <span>Utilizadas</span></h2>
+          <p>Plataformas e softwares especializados para gestão eficiente de redes sociais</p>
+        </div>
+        
+        <div class="tech-grid">
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Facebook">
+            </div>
+            <span class="tech-name">Facebook</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn">
+            </div>
+            <span class="tech-name">LinkedIn</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <i class="fab fa-instagram fa-3x" style="color: #C13584;"></i>
+            </div>
+            <span class="tech-name">Instagram</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <i class="fab fa-tiktok fa-3x" style="color: #000000;"></i>
+            </div>
+            <span class="tech-name">TikTok</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" alt="Twitter/X">
+            </div>
+            <span class="tech-name">Twitter/X</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Meta_Business_Suite.svg" alt="Meta Business Suite">
+            </div>
+            <span class="tech-name">Meta Business Suite</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Hootsuite-Logo-Black.svg" alt="Hootsuite">
+            </div>
+            <span class="tech-name">Hootsuite</span>
+          </div>
+          
+          <div class="tech-item">
+            <div class="tech-icon">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Canva_Logo.svg" alt="Canva">
+            </div>
+            <span class="tech-name">Canva</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="faq-background"></div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Perguntas <span>Frequentes</span></h2>
+          <p>Tire suas dúvidas sobre nossos serviços de gestão de redes sociais</p>
+        </div>
+        
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Por que contar com profissionais para gerenciar minhas redes sociais?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>A gestão profissional de redes sociais vai muito além de simplesmente postar conteúdo. Envolve estratégia, análise de dados, conhecimento de algoritmos e tendências de cada plataforma. Nossos especialistas desenvolvem campanhas baseadas em dados que realmente geram resultados, economizando seu tempo e garantindo um ROI positivo.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Em quais redes sociais minha empresa deveria estar presente?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Nem todas as redes sociais são adequadas para todos os negócios. Realizamos uma análise detalhada do seu público-alvo e objetivos para identificar as plataformas mais eficazes para sua marca. Por exemplo, B2B geralmente se beneficia mais do LinkedIn, enquanto negócios visuais prosperam no Instagram e TikTok.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Como vocês medem o sucesso das estratégias de redes sociais?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Estabelecemos KPIs específicos alinhados aos seus objetivos de negócio e monitoramos métricas relevantes como taxa de engajamento, alcance, crescimento de seguidores, tráfego para o site, taxa de conversão e ROI. Utilizamos ferramentas avançadas de análise para fornecer relatórios mensais detalhados.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Qual a frequência ideal de postagens nas redes sociais?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>A frequência ideal varia conforme a plataforma e seu público específico. Mais importante que a quantidade é a qualidade e consistência do conteúdo. Desenvolvemos calendários editoriais personalizados baseados em análises de engagement por horário e dia da semana.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Como transformar seguidores em clientes nas redes sociais?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Convertemos seguidores em clientes através de um funil de conteúdo estratégico, equilibrando posts educativos, inspiradores e promocionais. Implementamos CTAs eficazes, criamos ofertas exclusivas para seguidores e desenvolvemos campanhas de remarketing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Fale <span>Conosco</span></h2>
+          <p>Estamos prontos para transformar sua presença nas redes sociais. Entre em contato!</p>
+        </div>
+        
+        <div class="contact-container">
+          <div class="contact-form">
+            <div class="form-container">
+              <form id="contactForm" action="https://formsubmit.co/contato@byte-ag.com.br" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="box">
+                <input type="hidden" name="_subject" value="Nova mensagem do site by.te - Gestão de Redes Sociais">
+                
+                <div class="form-row">
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="name" class="form-label">Nome</label>
+                      <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome" required>
+                      <span class="error-message" id="nameError"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" id="email" name="email" class="form-control" placeholder="Seu email" required>
+                      <span class="error-message" id="emailError"></span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="phone" class="form-label">Telefone</label>
+                      <input type="tel" id="phone" name="phone" class="form-control" placeholder="(11) 99999-9999">
+                      <span class="error-message" id="phoneError"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="company" class="form-label">Empresa</label>
+                      <input type="text" id="company" name="company" class="form-control" placeholder="Sua empresa">
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="service" class="form-label">Serviço de Interesse</label>
+                  <select id="service" name="service" class="form-control" required>
+                    <option value="" disabled>Selecione um serviço</option>
+                    <option value="Desenvolvimento Web">Desenvolvimento Web</option>
+                    <option value="Social Media" selected>Social Media</option>
+                    <option value="Gestão de Anúncios">Gestão de Anúncios</option>
+                    <option value="Google Meu Negócio">Google Meu Negócio</option>
+                    <option value="Gestão de Avaliações">Gestão de Avaliações</option>
+                    <option value="Dashboards">Dashboards</option>
+                    <option value="SEO">SEO</option>
+                    <option value="Outro">Outro</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="message" class="form-label">Mensagem</label>
+                  <textarea id="message" name="message" class="form-control" placeholder="Como podemos ajudar?" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                  <span class="btn-text">Enviar Mensagem</span>
+                  <span class="btn-loader" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> Enviando...
+                  </span>
+                </button>
+              </form>
+            </div>
+          </div>
+          
+          <!-- Modal de Sucesso -->
+          <div id="successModal" class="success-modal">
+            <div class="success-modal-content">
+              <div class="success-modal-icon">
+                <i class="fas fa-check"></i>
+              </div>
+              <h3>Mensagem Enviada!</h3>
+              <p>Obrigado por entrar em contato conosco. Retornaremos em breve.</p>
+              <button type="button" class="success-modal-close" onclick="closeSuccessModal()">Fechar</button>
+            </div>
+          </div>
+
+          <div class="contact-info">
+            <div class="contact-card">
+              <h3>Informações de Contato</h3>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Telefone</h4>
+                  <p><a href="tel:+551199999999">(11) 9999-9999</a></p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Email</h4>
+                  <p><a href="mailto:contato@byte.com.br">contato@byte.com.br</a></p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Horário de Atendimento</h4>
+                  <p>Segunda a Sexta: 9h às 18h</p>
+                </div>
+              </div>
+              
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com/byte_ag" class="social-link" aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="WhatsApp">
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="../imgs/Byte.png" alt="by.te logo" width="120" height="40">
+          </div>
+          <p class="footer-about">Somos uma agência digital especializada em transformar ideias em resultados concretos através de soluções digitais inovadoras e estratégicas.</p>
+        </div>
+        
+        <div class="footer-col">
+          <h3 class="footer-heading">Serviços</h3>
+          <ul class="footer-links">
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Desenvolvimento Web</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Social Media</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Google Ads</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Google Meu Negócio</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Gestão de Avaliações</a></li>
+            <li><a href="../#services"><i class="fas fa-angle-right"></i> Dashboards</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3 class="footer-heading">Links Úteis</h3>
+          <ul class="footer-links">
+            <li><a href="../#about"><i class="fas fa-angle-right"></i> Quem Somos</a></li>
+            <li><a href="../#clients"><i class="fas fa-angle-right"></i> Clientes</a></li>
+            <li><a href="#contact"><i class="fas fa-angle-right"></i> Contato</a></li>
+            <li><a href="#"><i class="fas fa-angle-right"></i> Política de Privacidade</a></li>
+            <li><a href="#"><i class="fas fa-angle-right"></i> Termos de Uso</a></li>
+          </ul>
+        </div>
+        
+        <!-- <div class="footer-col">
+          <h3 class="footer-heading">Newsletter</h3>
+          <p class="footer-newsletter">Inscreva-se para receber nossas novidades e conteúdos exclusivos sobre marketing digital.</p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Seu e-mail" required>
+            <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div> -->
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2025 by.te - Todos os direitos reservados</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com/byte_ag" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    // Validação de formulário de contato
+    document.addEventListener("DOMContentLoaded", function() {
+      const contactForm = document.getElementById("contactForm");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("phone");
+      const nameInput = document.getElementById("name");
+      const emailError = document.getElementById("emailError");
+      const phoneError = document.getElementById("phoneError");
+      const nameError = document.getElementById("nameError");
+
+      function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      function validatePhone(phone) {
+        const cleanPhone = phone.replace(/\D/g, '');
+        return cleanPhone.length >= 10 && cleanPhone.length <= 11;
+      }
+
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, '');
+          if (value.length > 0) {
+            if (value.length <= 10) {
+              value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            } else {
+              value = value.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+            }
+          }
+          e.target.value = value;
+          
+          if (value.length > 0) {
+            const cleanValue = value.replace(/\D/g, '');
+            if (cleanValue.length < 10) {
+              phoneError.textContent = 'Telefone deve ter pelo menos 10 dígitos';
+              phoneError.style.display = 'block';
+              phoneInput.classList.add('error');
+            } else {
+              phoneError.textContent = '';
+              phoneError.style.display = 'none';
+              phoneInput.classList.remove('error');
+            }
+          } else {
+            phoneError.textContent = '';
+            phoneError.style.display = 'none';
+            phoneInput.classList.remove('error');
+          }
+        });
+
+        phoneInput.addEventListener('blur', function(e) {
+          const value = e.target.value.replace(/\D/g, '');
+          if (value.length > 0 && !validatePhone(e.target.value)) {
+            phoneError.textContent = 'Por favor, insira um telefone válido (ex: (11) 99999-9999)';
+            phoneError.style.display = 'block';
+            phoneInput.classList.add('error');
+          }
+        });
+      }
+
+      if (emailInput) {
+        emailInput.addEventListener('blur', function(e) {
+          if (e.target.value && !validateEmail(e.target.value)) {
+            emailError.textContent = 'Por favor, insira um email válido';
+            emailError.style.display = 'block';
+            emailInput.classList.add('error');
+          } else {
+            emailError.textContent = '';
+            emailError.style.display = 'none';
+            emailInput.classList.remove('error');
+          }
+        });
+
+        emailInput.addEventListener('input', function(e) {
+          if (emailError.textContent && validateEmail(e.target.value)) {
+            emailError.textContent = '';
+            emailError.style.display = 'none';
+            emailInput.classList.remove('error');
+          }
+        });
+      }
+
+      if (nameInput) {
+        nameInput.addEventListener('blur', function(e) {
+          if (e.target.value.trim().length < 2) {
+            nameError.textContent = 'Nome deve ter pelo menos 2 caracteres';
+            nameError.style.display = 'block';
+            nameInput.classList.add('error');
+          } else {
+            nameError.textContent = '';
+            nameError.style.display = 'none';
+            nameInput.classList.remove('error');
+          }
+        });
+      }
+
+      window.closeSuccessModal = function() {
+        const modal = document.getElementById('successModal');
+        if (modal) {
+          modal.classList.remove('active');
+          modal.style.display = 'none';
+          document.documentElement.classList.remove('modal-open');
+          document.body.classList.remove('modal-open');
+        }
+      };
+
+      const successModal = document.getElementById('successModal');
+      if (successModal) {
+        successModal.addEventListener('click', function(e) {
+          if (e.target === successModal) {
+            closeSuccessModal();
+          }
+        });
+      }
+
+      if (contactForm) {
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+        const btnLoader = submitBtn ? submitBtn.querySelector('.btn-loader') : null;
+
+        contactForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+
+          let isValid = true;
+
+          [nameError, emailError, phoneError].forEach(error => {
+            if (error) {
+              error.textContent = '';
+              error.style.display = 'none';
+            }
+          });
+          [nameInput, emailInput, phoneInput].forEach(input => {
+            if (input) input.classList.remove('error');
+          });
+
+          if (nameInput && nameInput.value.trim().length < 2) {
+            nameError.textContent = 'Nome deve ter pelo menos 2 caracteres';
+            nameError.style.display = 'block';
+            nameInput.classList.add('error');
+            isValid = false;
+          }
+
+          if (emailInput && (!emailInput.value || !validateEmail(emailInput.value))) {
+            emailError.textContent = 'Por favor, insira um email válido';
+            emailError.style.display = 'block';
+            emailInput.classList.add('error');
+            isValid = false;
+          }
+
+          if (phoneInput && phoneInput.value.trim().length > 0) {
+            if (!validatePhone(phoneInput.value)) {
+              phoneError.textContent = 'Por favor, insira um telefone válido (ex: (11) 99999-9999)';
+              phoneError.style.display = 'block';
+              phoneInput.classList.add('error');
+              isValid = false;
+            }
+          }
+
+          if (!isValid) {
+            const firstError = contactForm.querySelector('.error');
+            if (firstError) {
+              firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              firstError.focus();
+            }
+            return false;
+          }
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            if (btnText) btnText.style.display = 'none';
+            if (btnLoader) btnLoader.style.display = 'inline-flex';
+          }
+
+          try {
+            const formData = new FormData(contactForm);
+
+            const response = await fetch(contactForm.action, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json'
+              },
+              body: formData
+            });
+
+            if (!response.ok) {
+              throw new Error('Falha ao enviar o formulário.');
+            }
+
+            contactForm.reset();
+            const serviceSelect = document.getElementById('service');
+            if (serviceSelect) {
+              serviceSelect.value = 'Social Media';
+            }
+            const modal = document.getElementById('successModal');
+            if (modal) {
+              modal.style.cssText = 'display: flex !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; z-index: 999999 !important;';
+              modal.classList.add('active');
+              void modal.offsetHeight;
+              document.documentElement.classList.add('modal-open');
+              document.body.classList.add('modal-open');
+            }
+          } catch (error) {
+            alert('Erro ao enviar mensagem. Por favor, tente novamente mais tarde.');
+            console.error('Erro ao enviar formulário:', error);
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              if (btnText) btnText.style.display = 'inline';
+              if (btnLoader) btnLoader.style.display = 'none';
+            }
+          }
+          return false;
+        }, true);
+      }
+    });
+  </script>
+</html> 
