@@ -21,20 +21,22 @@
   <link rel="dns-prefetch" href="https://formsubmit.co">
   <link rel="dns-prefetch" href="https://randomuser.me">
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="preconnect" href="https://formsubmit.co" crossorigin>
   
   <!-- Preload critical resources only -->
-  <link rel="preload" href="imgs/Byte.png" as="image" fetchpriority="high">
-  <link rel="preload" href="css/fonts.css" as="style">
+  <link rel="preload" href="imgs/Byte.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="fonts/poppins/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/poppins/poppins-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/space-grotesk/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
   
-  <!-- Critical CSS - Load synchronously -->
-  <link rel="stylesheet" href="css/fonts.css">
-  <link rel="stylesheet" href="style.css">
+  <!-- Critical CSS inline; style.css completo carregado de forma assíncrona -->
+  <style>@font-face {font-family: 'Poppins';font-style: normal;font-weight: 300;font-display: swap;src: url(fonts/poppins/poppins-300.woff2) format('woff2');}@font-face {font-family: 'Poppins';font-style: normal;font-weight: 400;font-display: swap;src: url(fonts/poppins/poppins-400.woff2) format('woff2');}@font-face {font-family: 'Poppins';font-style: normal;font-weight: 500;font-display: swap;src: url(fonts/poppins/poppins-500.woff2) format('woff2');}@font-face {font-family: 'Poppins';font-style: normal;font-weight: 600;font-display: swap;src: url(fonts/poppins/poppins-600.woff2) format('woff2');}@font-face {font-family: 'Poppins';font-style: normal;font-weight: 700;font-display: swap;src: url(fonts/poppins/poppins-700.woff2) format('woff2');}@font-face {font-family: 'Poppins';font-style: normal;font-weight: 800;font-display: swap;src: url(fonts/poppins/poppins-800.woff2) format('woff2');}@font-face {font-family: 'Space Grotesk';font-style: normal;font-weight: 400;font-display: swap;src: url(fonts/space-grotesk/space-grotesk-400.woff2) format('woff2');}@font-face {font-family: 'Space Grotesk';font-style: normal;font-weight: 500;font-display: swap;src: url(fonts/space-grotesk/space-grotesk-500.woff2) format('woff2');}@font-face {font-family: 'Space Grotesk';font-style: normal;font-weight: 600;font-display: swap;src: url(fonts/space-grotesk/space-grotesk-600.woff2) format('woff2');}@font-face {font-family: 'Space Grotesk';font-style: normal;font-weight: 700;font-display: swap;src: url(fonts/space-grotesk/space-grotesk-700.woff2) format('woff2');}</style>
+  <style>body,header{background-color:var(--bg-color)}.header-cta,.logo img,header{transition:.3s}.container,header,nav ul li a:focus::after,nav ul li a:hover::after{width:100%}.menu-toggle,body,nav ul li a{color:var(--text-color)}.header-cta,nav ul li a{font-size:1rem;text-decoration:none}.hero,body{min-height:100vh}*{box-sizing:border-box}nav ul{list-style:none}.cta-btn,.hero,.hero h1,.hero p{text-align:center}.cta-btn,.header-cta,.logo,.whatsapp-button,nav ul li a{text-decoration:none}:root{--primary-color:#ffc857;--primary-light:#ffd57e;--primary-dark:#e6b43e;--text-color:#ffffff;--bg-color:#0a0a0a;--bg-light:#121212;--bg-lighter:#1e1e1e;--accent-blue:#4361ee;--accent-purple:#7b2cbf;--accent-green:#2ec4b6;--accent-red:#e63946;--accent-orange:#ff6b35;--light-bg:#f8f9fa;--dark-text:#212529;--gray-text:#9ca3af;--medium-gray:#6b7280;--service-bg:#121212;--service-hover:#1a1a1a;--menu-bg:rgba(10, 10, 10, 0.98);--menu-overlay:rgba(0, 0, 0, 0.7);--transition-speed:0.2s;--border-radius-sm:8px;--border-radius-md:12px;--border-radius-lg:20px;--border-radius-xl:30px;--shadow-sm:0 4px 6px rgba(0, 0, 0, 0.1);--shadow-md:0 10px 15px rgba(0, 0, 0, 0.1);--shadow-lg:0 20px 25px rgba(0, 0, 0, 0.15);--shadow-highlight:0 10px 20px rgba(255, 200, 87, 0.2)}*{margin:0;padding:0}body{font-family:Poppins,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;overflow-x:hidden;text-rendering:optimizeSpeed;will-change:transform}.transition-transform{transition:transform var(--transition-speed) ease;will-change:transform}img{max-width:100%;height:auto;content-visibility:auto}.hero,.visually-hidden{overflow:hidden}.performance-optimized{transform:translateZ(0);backface-visibility:hidden;perspective:1000px}h1{font-family:"Space Grotesk",Poppins,sans-serif;font-weight:700}.container{max-width:1280px;margin:0 auto;padding:0 20px}.visually-hidden{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;padding:0;position:absolute;width:1px}header{padding:20px 0;position:fixed;top:0;left:0;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,.3);border-bottom:1px solid var(--gray-text)}.hamburger-icon,.hero,.hero h1 span,.hero-content,nav,nav ul li a{position:relative}.header-container{display:flex;justify-content:space-between;align-items:center}.logo{display:block;z-index:1001}.logo:focus,.menu-toggle:focus{outline:2px solid var(--primary-color);outline-offset:3px}.logo img{height:auto;width:90px;display:block}header.scrolled .logo img{width:80px}nav ul{display:flex;align-items:center}nav ul li{margin-left:40px}nav ul li:last-child{margin:0 40px}nav ul li a{font-weight:500;text-transform:uppercase;transition:color .3s;padding:5px}nav ul li a::after{content:"";position:absolute;width:0;height:2px;bottom:0;left:0;background-color:var(--primary-color);transition:width .3s}nav ul li a:focus,nav ul li a:hover{color:var(--primary-color);outline:0}.menu-toggle{display:none;cursor:pointer;background:0 0;border:none;padding:10px;z-index:1001;transition:all var(--transition-speed) ease}.header-cta,.hero h1 span::after{background-color:var(--primary-color)}.hamburger-icon{display:inline-block;width:30px;height:20px}.hamburger-icon span{display:block;position:absolute;height:3px;width:100%;background:var(--text-color);border-radius:3px;opacity:1;left:0;transform:rotate(0);transition:.25s ease-in-out}.hamburger-icon span:first-child{top:0}.hamburger-icon span:nth-child(2),.hamburger-icon span:nth-child(3){top:9px}.hamburger-icon span:nth-child(4){top:18px}.menu-toggle.active .hamburger-icon span:first-child,.menu-toggle.active .hamburger-icon span:nth-child(4){top:9px;width:0%;left:50%}.menu-toggle.active .hamburger-icon span:nth-child(2){transform:rotate(45deg)}.menu-toggle.active .hamburger-icon span:nth-child(3){transform:rotate(-45deg)}.header-cta{display:inline-block;color:var(--bg-color);padding:12px 40px;border-radius:var(--border-radius-xl);font-weight:600;border:2px solid var(--primary-color);margin-left:30px}.hero h1,.service-tag{color:var(--text-color)}.service-tag{font-weight:500}.cta-btn,.service-tag{border-radius:var(--border-radius-xl);transition:.3s}.header-cta:focus,.header-cta:hover{background-color:transparent;color:var(--primary-color);transform:translateY(-2px);outline:0}.hero{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:70px 0 60px}.hero::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 70% 20%,rgba(255,200,87,.14),transparent 60%),linear-gradient(160deg,#1e1e1e 0%,#121212 55%,#0a0a0a 100%);z-index:-1}.hero-content{z-index:2;max-width:1000px}.hero h1{font-size:3.5rem;font-weight:800;margin-bottom:20px;line-height:1.1;width:100%}.hero h1 span{color:var(--primary-color);display:inline-block}.hero h1 span::after{content:"";position:absolute;width:100%;height:8px;bottom:5px;left:0;opacity:.3;z-index:-1}.hero p{font-size:1.2rem;max-width:850px;margin:0 auto 20px;padding:0 20px;width:100%;color:var(--gray-text)}.services-list{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;margin:0 auto;max-width:900px}.service-tag{background-color:rgba(255,255,255,.1);padding:8px 16px;font-size:.9rem}.cta-btn{font-weight:600}.service-tag:hover{background-color:var(--primary-color);color:var(--bg-color);transform:translateY(-3px)}.cta-buttons{display:flex;gap:20px;justify-content:center;margin-top:0;flex-wrap:wrap}.cta-btn{padding:10px 36px;font-size:1rem}.cta-btn-primary{background-color:var(--primary-color);color:var(--bg-color);border:2px solid var(--primary-color)}.cta-btn-primary:focus,.cta-btn-primary:hover{background-color:var(--primary-dark);border-color:var(--primary-dark);transform:translateY(-3px);box-shadow:var(--shadow-highlight);outline:0}.cta-btn-secondary{background-color:transparent;color:var(--text-color);border:2px solid var(--text-color)}.cta-btn-secondary:focus,.cta-btn-secondary:hover{background-color:var(--text-color);color:var(--bg-color);transform:translateY(-3px);box-shadow:var(--shadow-md);outline:0}.scroll-down{color:var(--text-color)}.scroll-down{position:absolute;bottom:0;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;font-size:.9rem;opacity:.7;transition:.3s;cursor:pointer}.scroll-down:hover{opacity:1;transform:translate(-50%,-5px)}.scroll-down i{font-size:1.5rem;animation:2s infinite bounce}@keyframes bounce{0%,100%,20%,50%,80%{transform:translateY(0)}40%{transform:translateY(-10px)}60%{transform:translateY(-5px)}}.whatsapp-button.show{opacity:1;visibility:visible}@media (max-width:1200px){.hero h1{font-size:2.5rem}}@media (max-width:992px){.hero h1{font-size:3rem}.hero p{font-size:1.3rem}.menu-toggle{display:block;position:absolute;right:1rem}nav ul{display:flex;flex-direction:column;position:fixed;top:0;right:-100%;width:300px;max-width:80%;height:100vh;background-color:var(--menu-bg);z-index:1000;padding:100px 20px 20px;box-shadow:-5px 0 15px rgba(0,0,0,.3);align-items:center;justify-content:flex-start;overflow-y:auto;transition:.4s;visibility:hidden;opacity:0}nav ul.active{right:0;visibility:visible;opacity:1}nav ul li{margin:15px 0;width:100%;text-align:center}nav ul li a{font-size:1.2rem;padding:12px;display:block;border-radius:8px}nav ul li a::after{display:none}nav ul li a:focus,nav ul li a:hover{background-color:rgba(255,200,87,.1)}.header-cta{margin-top:20px;margin-left:0}}@media (max-width:768px){.hero h1{font-size:2.5rem}.hero p{font-size:1.1rem}.cta-buttons{flex-direction:column;gap:15px}}@media (max-width:576px){.hero h1{font-size:2rem}.hero p{font-size:1rem}.service-tag{padding:8px 10px;font-size:.72rem}.cta-btn:last-child{margin-top:10px}}.cta-btn{display:inline-block;margin-top:30px}.whatsapp-button{position:sticky;top:90vh;left:93%;width:74px;height:75px;background-color:#25d366;color:#fff;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:48px;box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:9999;opacity:0;visibility:hidden;transition:.3s}.whatsapp-button:hover{transform:scale(1.1);background-color:#128c7e}@media (max-width:768px){.whatsapp-button{width:50px;top:92vh;height:50px;bottom:20px;left:85%;font-size:1.8rem}}</style>
+  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css"></noscript>
   
   <!-- Non-critical CSS - Load asynchronously -->
-  <link rel="preload" href="css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/all.min.css"></noscript>
+  <link rel="preload" href="css/fa-lite.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/fa-lite.css"></noscript>
   
   <!-- Fallback for browsers that don't support onload on link -->
   <script>
@@ -213,7 +215,7 @@
     }
   </style>
   
-  <link rel="icon" type="image/png" href="imgs/Byte.png">
+  <link rel="icon" type="image/png" href="imgs/Byte.webp">
 
   <!-- SEO Básico -->
   <title>Agência Digital by.te | Criação de Sites Profissionais, SEO e Marketing</title>
@@ -236,6 +238,7 @@
   <meta name="twitter:image" content="https://www.byte-ag.com.br/imgs/thumb.jpg" />
   <meta name="twitter:url" content="https://www.byte-ag.com.br/" />
 
+<script>addEventListener('load',function(){document.documentElement.classList.add('bg-ready')})</script>
 </head>
 
 
@@ -257,7 +260,7 @@
   <header id="header" class="performance-optimized">
     <div class="container header-container">
       <a href="#" class="logo" aria-label="By.te - Página inicial">
-        <img src="imgs/Byte.png" alt="by.te logo" width="120" height="40" fetchpriority="high">
+        <img src="imgs/Byte.webp" alt="by.te logo" width="120" height="40" fetchpriority="high">
       </a>
       <button class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu de navegação">
         <div class="hamburger-icon">
@@ -273,7 +276,7 @@
           <li><a href="#services">Serviços</a></li>
           <li><a href="#clients">Clientes</a></li>
           <li><a href="#contact">Contato</a></li>
-          <a href="#contact" class="header-cta">Fale conosco</a>
+          <li><a href="#contact" class="header-cta">Fale conosco</a></li>
         </ul>
       </nav>
     </div>
@@ -1043,7 +1046,7 @@
       <div class="footer-content">
         <div class="footer-col">
           <div class="footer-logo">
-            <img src="/imgs/Byte.png" alt="by.te logo" width="187" height="114" loading="lazy">
+            <img src="/imgs/Byte.webp" alt="by.te logo" width="187" height="114" loading="lazy">
           </div>
           <p class="footer-about">Somos uma agência digital especializada em transformar ideias em resultados concretos através de soluções digitais inovadoras e estratégicas.</p>
         </div>
@@ -1353,10 +1356,17 @@
   
   <!-- Google Tag Manager - Moved to end for better performance -->
   <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.defer=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    (function(w,d,s,l,i){
+      var loaded=false;
+      function load(){
+        if(loaded)return;loaded=true;
+        w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],j=d.createElement(s);
+        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;
+        f.parentNode.insertBefore(j,f);
+      }
+      ['scroll','pointerdown','keydown','touchstart'].forEach(function(e){w.addEventListener(e,load,{once:true,passive:true});});
+      w.addEventListener('load',function(){setTimeout(load,4000);});
     })(window,document,'script','dataLayer','GTM-WXXCMBMJ');
   </script>
   <!-- End Google Tag Manager -->

@@ -1,6 +1,10 @@
 # Byte Ag — Site Institucional
 
-Site institucional da **Byte Ag** ([byte-ag.com.br](https://www.byte-ag.com.br)), agência de marketing digital e tecnologia. O projeto é um site estático (HTML, CSS e JavaScript puro), sem build nem dependências de backend, pensado para hospedagem tradicional em Apache (`public_html`).
+Site institucional da **Byte Ag**, agência de marketing digital e tecnologia. O projeto é um site estático (HTML, CSS e JavaScript puro), sem build nem dependências de backend.
+
+🌐 **No momento, o site está visível em:** [https://wesleylcs.github.io/Agencia-Byte/](https://wesleylcs.github.io/Agencia-Byte/)
+
+> O domínio original (byte-ag.com.br) não está mais ativo, pois o projeto não teve continuidade. O site está hospedado gratuitamente no GitHub Pages, por isso algumas referências ao domínio antigo (canonical, sitemap, robots.txt) ainda aparecem nos arquivos.
 
 ## Serviços apresentados
 
@@ -22,7 +26,7 @@ Site institucional da **Byte Ag** ([byte-ag.com.br](https://www.byte-ag.com.br))
 ├── fonts/ e webfonts/    # Poppins, Space Grotesk e Font Awesome (hospedados localmente)
 ├── imgs/                 # Imagens (maioria em WebP)
 ├── script.js             # Menu, FAQ, depoimentos, lazy-load e envio de formulários
-├── .htaccess             # HTTPS, www, redirecionamentos, cache, gzip e headers de segurança
+├── .htaccess             # Regras para Apache (ignorado no GitHub Pages)
 ├── robots.txt
 └── sitemap.xml
 ```
@@ -30,7 +34,7 @@ Site institucional da **Byte Ag** ([byte-ag.com.br](https://www.byte-ag.com.br))
 ## Recursos
 
 - Layout responsivo
-- Otimização de performance: CSS crítico, lazy-load de imagens, fontes locais, compressão e cache via `.htaccess`
+- Otimização de performance: CSS crítico, lazy-load de imagens, fontes locais e hero com gradiente (sem imagem pesada)
 - SEO: sitemap, robots.txt e redirecionamentos 301
 - Formulário de contato via [FormSubmit](https://formsubmit.co)
 - Botão flutuante de WhatsApp
@@ -46,7 +50,7 @@ npx serve .
 python -m http.server 8000
 ```
 
-> As regras do `.htaccess` só funcionam em servidores Apache com `mod_rewrite`, `mod_expires`, `mod_deflate` e `mod_headers`.
+> As regras do `.htaccess` só funcionam em servidores Apache. No GitHub Pages elas são ignoradas.
 
 ## Configuração antes de usar como base
 
